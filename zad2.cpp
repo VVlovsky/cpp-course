@@ -1,4 +1,4 @@
-//kod nie jest moj, pisalem z przykladu, ale teraz juz wiem, jak to dziala.
+//kod nie jest moj, pisalem z przykladu, ale teraz juz rozumiem, jak to dziala.
 
 #include <iostream>
 #include <ostream>
