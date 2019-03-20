@@ -1,3 +1,5 @@
+//kod nie jest moj, pisalem z przykladu, ale teraz juz wiem, jak to dziala.
+
 #include <iostream>
 #include <ostream>
 #include <string>
