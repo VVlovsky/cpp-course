@@ -26,14 +26,15 @@ std::unique_ptr<SmartTree> RestoreTree(const std::string &tree);
 
 
 int main() {
+    std::unique_ptr<SmartTree> test_tree;
     return 0;
 }
 
 
 std::unique_ptr<SmartTree> CreateLeaf(int value) {
-    SmartTree leaf = {value, nullptr, nullptr};
-    auto newleaf = std::make_unique<SmartTree>(std::move(leaf));
-    return newleaf;
+    SmartTree tmp = {value, nullptr, nullptr};
+    auto leaf = std::make_unique<SmartTree>(std::move(tmp));
+    return leaf;
 }
 
 std::unique_ptr<SmartTree> InsertLeftChild(std::unique_ptr<SmartTree> tree, std::unique_ptr<SmartTree> left_subtree) {
@@ -65,67 +66,69 @@ std::string DumpTree(const std::unique_ptr<SmartTree> &tree) {
     if (tree->left != nullptr) {
         dump += DumpTree(tree->left);
     } else {
-        dump += "[none]";
+        dump += "[null]";
     }
     dump += " ";
     if (tree->right != nullptr) {
         dump += DumpTree(tree->right);
     } else {
-        dump += "[none]";
+        dump += "[null]";
     }
     dump += "]";
     return dump;
 }
 
 std::unique_ptr<SmartTree> RestoreTree(const std::string &tree) {
-    if (tree == "[none]") {
+
+    if (tree == "[null]") {
         return nullptr;
     }
-    int iterator = 1;
+
+    int counter = 1;
     std::string value;
-    unsigned long stringsize = tree.length();
+    unsigned long tree_length = tree.length();
 
-    while (iterator < stringsize) {
-        if (tree[iterator] == ' ') {
-            value = tree.substr(1, iterator);
-            iterator++;
+    while (counter < tree_length) {
+        if (tree[counter] == ' ') {
+            value = tree.substr(1, counter);
+            counter++;
             break;
         }
-        iterator++;
+        counter++;
     }
-    //left child
-    int bracketscounter = 0;
-    int leftstart = iterator;
+
+    int brackets_counter = 0;
+    int left = counter;
     std::string leftchild;
-    while (iterator < stringsize) {
-        if (tree[iterator] == '[') {
-            bracketscounter += 1;
-        } else if (tree[iterator] == ']') {
-            bracketscounter -= 1;
+    while (counter < tree_length) {
+        if (tree[counter] == '[') {
+            brackets_counter += 1;
+        } else if (tree[counter] == ']') {
+            brackets_counter -= 1;
         }
-        if (bracketscounter == 0) {
-            leftchild = tree.substr(leftstart, iterator - leftstart + 1);
-            iterator += 2;
+        if (brackets_counter == 0) {
+            leftchild = tree.substr(left, counter - left + 1);
+            counter += 2;
             break;
         }
-        iterator++;
+        counter++;
     }
 
-    bracketscounter = 0;
-    int rightstart = iterator;
+    brackets_counter = 0;
+    int right = counter;
     std::string rightchild;
-    while (iterator < stringsize) {
-        if (tree[iterator] == '[') {
-            bracketscounter += 1;
-        } else if (tree[iterator] == ']') {
-            bracketscounter -= 1;
+    while (counter < tree_length) {
+        if (tree[counter] == '[') {
+            brackets_counter += 1;
+        } else if (tree[counter] == ']') {
+            brackets_counter -= 1;
         }
-        if (bracketscounter == 0) {
-            rightchild = tree.substr(rightstart, iterator - rightstart + 1);
-            iterator++;
+        if (brackets_counter == 0) {
+            rightchild = tree.substr(right, counter - right + 1);
+            counter++;
             break;
         }
-        iterator++;
+        counter++;
     }
 
     auto root = CreateLeaf(std::stoi(value));
