@@ -4,7 +4,7 @@
 #include "Name.h"
 
 Name::Name(const std::string &name) {
-    std::vector<std::string> name_vector;
+    std::vector <std::string> name_vector;
     int tmp = 0;
     int stop_i = static_cast<int>(name.length());
 
@@ -119,12 +119,10 @@ std::string Name::create_name_initials() const {
     initials += ". ";
 
     if (second_name) {
-        initials += (*second_name)[0];
-        initials += ". ";
+        initials += (*second_name)[0] + ". ";
     }
     if (third_name) {
-        initials += (*third_name)[0];
-        initials += ". ";
+        initials += (*third_name)[0] + ". ";
     }
     return initials;
 }
