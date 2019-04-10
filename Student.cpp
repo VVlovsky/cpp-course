@@ -42,7 +42,6 @@ std::istream &operator>>(std::istream &input, Student &student) {
 
     size_t pos = 0;
     std::string token;
-    std::string delimiter = ": \"";
     std::vector<std::string> parsed;
     int counter = 0;
 
@@ -55,7 +54,7 @@ std::istream &operator>>(std::istream &input, Student &student) {
         }
 
         counter++;
-        str_to_parse.erase(0, pos + delimiter.length());
+        str_to_parse.erase(0, pos + 1);
 
     }
 
