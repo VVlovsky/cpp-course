@@ -6,9 +6,7 @@
 #define JMP2_STUDENT_H
 
 
-
-
-class Student {
+class Student : public std::error_code {
 public:
     Student();
 
@@ -16,11 +14,20 @@ public:
 
     ~Student();
 
+    bool validate_name_surname(std::string name);
+
+    bool validate_name_characters(std::string name);
+
+    bool validate_age(int age);
+
+    bool validate_program(std::string program);
+
+
 private:
     std::string firstName;
     std::string lastName;
-    std::string field;
-    int age;
+    std::string program;
+    int age{};
 
 
 };
