@@ -7,6 +7,7 @@
 
 
 #include "Student.h"
+#include "Query/Query.h"
 #include <vector>
 
 class StudentRepository {
@@ -17,6 +18,8 @@ public:
     Student operator[](int index);
 
     void add_student(const Student& student);
+
+    std::vector<Student>FindByQuery(const Query &query);
 
 };
 
